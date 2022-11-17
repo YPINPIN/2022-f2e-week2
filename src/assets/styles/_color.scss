@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #333333;
+  --bg-color: var(--gray-80);
   // Primary color
   --primary-default: #b7ec5d;
   --primary-dark: #648d1e;
@@ -26,4 +26,14 @@
   --pen-black: #000000;
   --pen-blue: #0066ff;
   --pen-red: #f93819;
+  // Gray color
+  --gray-90: #1a1a1a;
+  --gray-80: #333333;
+  --gray-70: #4d4d4d;
+  --gray-60: #666666;
+  --gray-50: #808080;
+  --gray-40: #999999;
+  --gray-30: #b3b3b3;
+  --gray-20: #cccccc;
+  --gray-10: #cccccc;
 }
