@@ -1,3 +1,29 @@
 :root {
   --bg-color: #333333;
+  // Primary color
+  --primary-default: #b7ec5d;
+  --primary-dark: #648d1e;
+  --primary-frame: rgba(183, 236, 93, 0.3);
+  --primary-linear: linear-gradient(
+    270deg,
+    rgba(183, 236, 93, 0) -6.5%,
+    rgba(183, 236, 93, 0.1) 85.58%,
+    rgba(183, 236, 93, 0.3) 100%
+  );
+  // Secondary color
+  --secondary-default: #4d4d4d;
+  --secondary-dark: #222222;
+  --secondary-tint: #f5f5f5;
+  // success color
+  --success-default: #b7ec5d;
+  --success-dark: #648d1e;
+  --success-tint: #d9ff99;
+  // danger color
+  --danger-default: #f93819;
+  --danger-dark: #a01600;
+  --danger-tint: #ffa394;
+  // Pen color
+  --pen-black: #000000;
+  --pen-blue: #0066ff;
+  --pen-red: #f93819;
 }

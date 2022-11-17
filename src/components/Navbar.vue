@@ -79,7 +79,7 @@ nav {
   }
 }
 
-@media screen and (max-width: 385px) {
+@media screen and (max-width: 576px) {
   nav {
     padding: 8px 12px;
     height: 46px;
