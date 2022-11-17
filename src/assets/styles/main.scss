@@ -1,2 +1,54 @@
 @import 'reset';
 @import 'color';
+
+@font-face {
+  font-family: 'GenJyuuGothic-P-M';
+  src: url(@/fonts/GenJyuuGothic-P-Medium.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'GenJyuuGothic-P-B';
+  src: url(@/fonts/GenJyuuGothic-P-Bold.ttf) format('truetype');
+}
+
+* {
+  // font-family: 'GenJyuuGothic-P-M', 'Noto Sans TC', sans-serif;
+  font-family: 'GenJyuuGothic-P-M';
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: black;
+}
+
+h1 {
+  font-size: 56px;
+}
+h2 {
+  font-size: 44px;
+}
+h3 {
+  font-size: 32px;
+}
+h4 {
+  font-size: 28px;
+}
+h5 {
+  font-size: 24px;
+}
+
+@media screen and (max-width: 375px) {
+  h1 {
+    font-size: 32px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+}
