@@ -1,9 +1,5 @@
 <template>
   <Navbar />
-  <h1>大標題 1</h1>
-  <router-link to="/">home</router-link>
-  <router-link to="/about">about</router-link>
-  <router-view></router-view>
 </template>
 
 <script>
@@ -16,4 +12,13 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+body {
+  overflow: hidden;
+  height: 100vh;
+  background-color: var(--bg-color);
+  background-image: url('./assets/images/other/bg_decorate.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+</style>
