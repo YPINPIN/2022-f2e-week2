@@ -33,7 +33,7 @@ export default {
     justify-content: center;
     align-items: center;
     &-btn {
-      transition: all 0.2s ease-in-out;
+      transition: transform 0.2s ease-in-out;
     }
     &-btn:hover {
       transform: scale(0.9);

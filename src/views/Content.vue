@@ -93,15 +93,15 @@ export default {
     top: 106px;
     z-index: 15;
     filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+    transition: transform 0.2s ease-in-out;
     &-btn {
       padding: 0;
-      transition: all 0.2s ease-in-out;
       img {
         width: 80px;
         height: 80px;
       }
     }
-    &-btn:hover {
+    &:hover {
       transform: scale(0.9);
     }
   }
