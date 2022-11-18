@@ -14,12 +14,23 @@
     <div class="content-bg">
       <router-view></router-view>
     </div>
+
+    <div class="content-add" v-show="currentRouteName !== 'ContentFile'">
+      <button class="content-add-btn">
+        <img src="@/assets/images/button/ic_add_tint.svg" alt="btn-add" />
+      </button>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
   name: 'Content',
+  computed: {
+    currentRouteName() {
+      return this.$route.name
+    },
+  },
 }
 </script>
 
@@ -74,6 +85,26 @@ export default {
     display: flex;
     flex-direction: column;
   }
+  &-add {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    right: -48px;
+    top: 106px;
+    z-index: 15;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+    &-btn {
+      padding: 0;
+      transition: all 0.2s ease-in-out;
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    &-btn:hover {
+      transform: scale(0.9);
+    }
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -98,6 +129,18 @@ export default {
     &-bg {
       padding: 12px;
       border-radius: 20px;
+    }
+    &-add {
+      width: 60px;
+      height: 60px;
+      right: 12px;
+      top: 16px;
+      &-btn {
+        img {
+          width: 60px;
+          height: 60px;
+        }
+      }
     }
   }
 }
