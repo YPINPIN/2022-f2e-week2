@@ -16,9 +16,9 @@
     </div>
 
     <div class="content-add" v-show="currentRouteName !== 'ContentFile'">
-      <button class="content-add-btn">
+      <router-link :to="{ name: 'Sign' }" class="content-add-btn">
         <img src="@/assets/images/button/ic_add_tint.svg" alt="btn-add" />
-      </button>
+      </router-link>
     </div>
   </section>
 </template>

@@ -2,9 +2,9 @@
   <h3 class="content-title">我的文件</h3>
   <div class="content-divider"></div>
   <div class="content-add">
-    <button class="content-add-btn">
+    <router-link :to="{ name: 'Sign' }" class="content-add-btn">
       <img src="@/assets/images/button/ic_add_dark.svg" alt="btn-add" />
-    </button>
+    </router-link>
     <h2 class="content-add-text">快來建立新檔吧</h2>
   </div>
 </template>
