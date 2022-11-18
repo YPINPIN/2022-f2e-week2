@@ -1,11 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store'
+
+const resetStep = (to, from, next) => {
+  console.log(from)
+  if (from.name !== "ContentFile" &&
+    from.name !== "ContentArchive" &&
+    from.name !== "ContentTrash") {
+    store.commit('initStep')
+  }
+  next()
+}
 
 const checkHasUpload = (to, from, next, isDone = false) => {
-  let hasUpload = false;
+  let hasUpload = store.state.hasUpload;
   // isDone 為 sign/done的檢查
   if (!isDone) {
     if (hasUpload) {
       // 已完成上傳步驟
+      store.commit('setStep', 2)
       next();
     } else {
       // 如果沒有經過上傳步驟，前往上傳
@@ -19,11 +31,7 @@ const checkHasUpload = (to, from, next, isDone = false) => {
 }
 
 const checkHasEdit = (to, from, next) => {
-  let hasEdit = false;
-  if (hasEdit) {
-    // 已完成編輯步驟
-    next();
-  }
+  let hasEdit = store.state.hasEdit;
   // 檢查是否有上傳步驟
   if (!checkHasUpload(to, from, next, true)) {
     // 如果沒有經過上傳步驟，前往上傳
@@ -32,6 +40,7 @@ const checkHasEdit = (to, from, next) => {
   } else {
     if (hasEdit) {
       // 已完成上傳步驟和編輯步驟
+      store.commit('setStep', 3)
       next();
     } else {
       // 如果有完成上傳步驟，沒有經過編輯步驟，前往編輯步驟
@@ -56,16 +65,19 @@ const routes = [
         path: 'file',
         name: 'ContentFile',
         component: () => import('../views/Content/ContentFile.vue'),
+        beforeEnter: resetStep
       },
       {
         path: 'archive',
         name: 'ContentArchive',
         component: () => import('../views/Content/ContentArchive.vue'),
+        beforeEnter: resetStep
       },
       {
         path: 'trash',
         name: 'ContentTrash',
         component: () => import('../views/Content/ContentTrash.vue'),
+        beforeEnter: resetStep
       },
     ],
   },
@@ -79,18 +91,22 @@ const routes = [
         path: 'upload',
         name: 'SignUpload',
         component: () => import('../views/Sign/SignUpload.vue'),
+        beforeEnter: (to, from, next) => {
+          store.commit('setStep', 1)
+          next()
+        }
       },
       {
         path: 'edit',
         name: 'SignEdit',
         component: () => import('../views/Sign/SignEdit.vue'),
-        // beforeEnter: checkHasUpload,
+        beforeEnter: checkHasUpload,
       },
       {
         path: 'done',
         name: 'SignDone',
         component: () => import('../views/Sign/SignDone.vue'),
-        // beforeEnter: checkHasEdit,
+        beforeEnter: checkHasEdit,
       },
     ],
   },

@@ -3,17 +3,18 @@
     <div class="sign-bg">
       <div class="sign-top">
         <router-link
-          @click="previous"
           :to="{ name: stepName[previousStep] }"
-          :class="['sign-step-btn', { disabled: step === previousStep }]"
+          :class="['sign-step-btn', { 'not-show': step === previousStep }]"
         >
           上一步
         </router-link>
         <h3 class="sign-top-title">{{ title[step] }}</h3>
         <router-link
-          @click="next"
           :to="{ name: stepName[nextStep] }"
-          :class="['sign-step-btn', { disabled: step === nextStep }]"
+          :class="[
+            'sign-step-btn',
+            { 'not-show': step === nextStep, disabled: isNextBtnDisabled },
+          ]"
         >
           下一步
         </router-link>
@@ -22,7 +23,6 @@
 
       <div class="sign-body">
         <div>Sign</div>
-        <input type="number" min="1" max="3" step="1" v-model="step" />
         <div>step : {{ step }}</div>
         <div>
           previousStep : {{ previousStep }} , {{ stepName[previousStep] }}
@@ -33,16 +33,17 @@
 
       <div class="sign-bottom">
         <router-link
-          @click="previous"
           :to="{ name: stepName[previousStep] }"
-          :class="['sign-step-btn', { disabled: step === previousStep }]"
+          :class="['sign-step-btn', { 'not-show': step === previousStep }]"
         >
           上一步
         </router-link>
         <router-link
-          @click="next"
           :to="{ name: stepName[nextStep] }"
-          :class="['sign-step-btn', { disabled: step === nextStep }]"
+          :class="[
+            'sign-step-btn',
+            { 'not-show': step === nextStep, disabled: isNextBtnDisabled },
+          ]"
           v-show="step !== nextStep"
         >
           下一步
@@ -53,33 +54,33 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
+
 export default {
   name: 'Sign',
   data() {
     return {
-      // 設定step = 1
-      step: 1,
-      maxStep: 3,
       stepName: ['Content', 'SignUpload', 'SignEdit', 'SignDone'],
       title: ['', '上傳檔案', '簽署文件', '簽署完成'],
     }
   },
-  methods: {
-    previous() {
-      console.log('previous')
-      this.step = this.step - 1 < 0 ? 0 : this.step - 1
-    },
-    next() {
-      console.log('next')
-      this.step = this.step + 1 > this.maxStep ? this.maxStep : this.step + 1
-    },
-  },
   computed: {
-    previousStep() {
-      return this.step - 1 < 0 ? 0 : this.step - 1
-    },
-    nextStep() {
-      return this.step + 1 > this.maxStep ? this.maxStep : this.step + 1
+    ...mapState(['step', 'maxStep', 'hasUpload', 'hasEdit']),
+    ...mapGetters(['previousStep', 'nextStep']),
+    // 檢查對應步驟是否完成
+    isNextBtnDisabled() {
+      let isDisabled = false
+      switch (this.$route.name) {
+        case 'SignUpload':
+          isDisabled = !this.hasUpload
+          break
+        case 'SignEdit':
+          isDisabled = !this.hasEdit
+          break
+        default:
+          break
+      }
+      return isDisabled
     },
   },
 }
@@ -128,7 +129,12 @@ export default {
     display: none;
   }
 }
+
 .sign-step-btn.disabled {
+  color: var(--gray-50);
+  pointer-events: none;
+}
+.sign-step-btn.not-show {
   opacity: 0;
   pointer-events: none;
 }
