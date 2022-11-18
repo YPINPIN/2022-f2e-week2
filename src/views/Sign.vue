@@ -6,7 +6,7 @@
           :to="{ name: stepName[previousStep] }"
           :class="['sign-step-btn', { 'not-show': step === previousStep }]"
         >
-          上一步
+          <span class="highlight">上一步</span>
         </router-link>
         <h3 class="sign-top-title">{{ title[step] }}</h3>
         <router-link
@@ -16,7 +16,7 @@
             { 'not-show': step === nextStep, disabled: isNextBtnDisabled },
           ]"
         >
-          下一步
+          <span class="highlight">下一步</span>
         </router-link>
       </div>
       <div class="sign-divider"></div>
@@ -36,7 +36,7 @@
           :to="{ name: stepName[previousStep] }"
           :class="['sign-step-btn', { 'not-show': step === previousStep }]"
         >
-          上一步
+          <span class="highlight">上一步</span>
         </router-link>
         <router-link
           :to="{ name: stepName[nextStep] }"
@@ -46,7 +46,7 @@
           ]"
           v-show="step !== nextStep"
         >
-          下一步
+          <span class="highlight">下一步</span>
         </router-link>
       </div>
     </div>
@@ -115,6 +115,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &-title {
+      color: var(--secondary-default);
+    }
   }
   &-divider {
     width: 100%;
@@ -130,13 +133,20 @@ export default {
   }
 }
 
-.sign-step-btn.disabled {
-  color: var(--gray-50);
-  pointer-events: none;
-}
-.sign-step-btn.not-show {
-  opacity: 0;
-  pointer-events: none;
+.sign-step-btn {
+  span {
+    color: var(--secondary-default);
+  }
+  &.disabled {
+    span {
+      color: var(--gray-50);
+    }
+    pointer-events: none;
+  }
+  &.not-show {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 @media screen and (max-width: 576px) {
