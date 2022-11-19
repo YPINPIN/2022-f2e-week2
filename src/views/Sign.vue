@@ -48,12 +48,12 @@
       <div class="sign-divider"></div>
 
       <div class="sign-body">
-        <div>Sign</div>
+        <!-- <div>Sign</div>
         <div>step : {{ step }}</div>
         <div>
           previousStep : {{ previousStep }} , {{ stepName[previousStep] }}
         </div>
-        <div>nextStep : {{ nextStep }} , {{ stepName[nextStep] }}</div>
+        <div>nextStep : {{ nextStep }} , {{ stepName[nextStep] }}</div> -->
         <router-view></router-view>
       </div>
 
@@ -179,6 +179,7 @@ export default {
   }
   &-body {
     height: 100%;
+    padding: 40px 30px 0px 30px;
   }
   &-bottom {
     display: none;
@@ -282,6 +283,9 @@ export default {
     &-divider {
       margin-top: 4px;
     }
+    &-body {
+      padding: 20px;
+    }
     &-bottom {
       display: flex;
       justify-content: center;
@@ -291,6 +295,7 @@ export default {
         justify-content: center;
         flex: 1;
         max-width: 50%;
+        height: 38px;
         text-align: center;
         gap: 10px;
         svg {
