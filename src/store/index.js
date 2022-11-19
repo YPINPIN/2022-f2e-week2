@@ -30,7 +30,16 @@ export default createStore({
     // 設定當前步驟
     setStep(state, curStep) {
       console.log('setStep : ', curStep)
+      if (state.step > 1) {
+        // 返回上傳步驟
+        state.hasUpload = false;
+      }
       state.step = curStep;
+    },
+    // 設定是否上傳檔案
+    setHasUpload(state, isUpload) {
+      console.log('setHasUpload : ', isUpload)
+      state.hasUpload = isUpload;
     }
   },
   actions: {},
