@@ -11,7 +11,10 @@ export default createStore({
     // 完成編輯
     hasEdit: false,
     uploadFile: undefined,
-    editFileImage: undefined
+    editFileImage: undefined,
+    // 開關NewSignModal
+    isNewSignModalOpen: false,
+    signFiles: []
   },
   getters: {
     previousStep(state) {
@@ -66,7 +69,19 @@ export default createStore({
       state.editFileImage = payload.value;
       console.log(state.editFileImage)
     },
+    // 設定NewSignModal開關
+    setIsNewSignModalOpen(state, isOpen) {
+      state.isNewSignModalOpen = isOpen
+    },
+    addSignFiles(state, payload) {
+      console.log('addSignFiles : ', payload)
+      state.signFiles.push(payload.value);
+    }
   },
-  actions: {},
+  actions: {
+    isNewSignModalOpen(context, isOpen) {
+      context.commit('setIsNewSignModalOpen', isOpen)
+    },
+  },
   modules: {}
 })

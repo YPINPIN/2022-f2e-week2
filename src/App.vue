@@ -3,14 +3,28 @@
   <main>
     <router-view></router-view>
   </main>
+  <NewSignModal v-show="isNewSignModalOpen" @close="handleNewSignModalClose" />
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
+import { mapState } from 'vuex'
+import NewSignModal from './components/NewSignModal.vue'
 
 export default {
   components: {
     Navbar,
+    NewSignModal,
+  },
+  computed: {
+    ...mapState(['isNewSignModalOpen']),
+  },
+  methods: {
+    // 關閉Modal
+    handleNewSignModalClose() {
+      console.log('handleNewSignModalClose')
+      this.$store.dispatch('isNewSignModalOpen', false)
+    },
   },
 }
 </script>
