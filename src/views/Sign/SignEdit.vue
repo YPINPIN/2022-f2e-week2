@@ -274,6 +274,9 @@ export default {
         transform: scale(0.9);
         background: white;
         border-radius: 20px;
+        &:hover {
+          background: rgba(183, 236, 93, 0.7);
+        }
       }
       .sign-add {
         &-btn {
