@@ -32,8 +32,9 @@ export default createStore({
     setStep(state, curStep) {
       console.log('setStep : ', curStep)
       if (state.step > 1) {
-        // 返回上傳步驟
+        // 返回上傳步驟，清除狀態
         state.hasUpload = false;
+        state.hasEdit = false;
       }
       state.step = curStep;
     },
@@ -46,7 +47,12 @@ export default createStore({
       console.log('setUploadFile : ', payload)
       state.uploadFile = payload.value;
       console.log(state.uploadFile)
-    }
+    },
+    // 設定是否編輯檔案
+    setHasEdit(state, isEdit) {
+      console.log('setHasEdit : ', isEdit)
+      state.hasEdit = isEdit;
+    },
   },
   actions: {},
   modules: {}
