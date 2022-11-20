@@ -420,6 +420,9 @@ export default {
     &-divider {
       margin-top: 4px;
     }
+    &-body {
+      height: calc(100% - 100px);
+    }
     &-bottom {
       display: flex;
       justify-content: center;
