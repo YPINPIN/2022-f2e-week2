@@ -1,24 +1,29 @@
 <template>
   <section class="sign-upload">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="100%"
-      height="100%"
-      v-if="!hasUpload"
-    >
-      <rect
-        x="0"
-        y="0"
-        rx="20"
-        ry="20"
-        width="100%"
-        height="100%"
-        fill="transparent"
-        stroke="black"
-        stroke-width="2px"
-        stroke-dasharray="8"
-      />
-    </svg>
+    <div class="sign-upload-bg">
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          v-if="!hasUpload"
+        >
+          <rect
+            x="0"
+            y="0"
+            rx="20"
+            ry="20"
+            width="100%"
+            height="100%"
+            fill="transparent"
+            stroke="black"
+            stroke-width="2px"
+            stroke-dasharray="8"
+          />
+        </svg>
+      </div>
+    </div>
+
     <div class="upload-action" v-if="!hasUpload">
       <img
         class="upload-action-icon"
@@ -130,15 +135,21 @@ export default {
 .sign-upload {
   position: relative;
   height: 100%;
-  padding: 5px;
-  svg {
+  &-bg {
     pointer-events: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 20px;
-    rect {
-      stroke: var(--secondary-default);
+    padding: 40px 30px 0px 30px;
+    width: 100%;
+    height: 100%;
+    div {
+      position: relative;
+      height: 100%;
+      svg {
+        border-radius: 20px;
+        rect {
+          stroke: var(--secondary-default);
+        }
+      }
     }
   }
 }
@@ -146,6 +157,7 @@ export default {
 .upload {
   &-action {
     height: 100%;
+    padding: 40px 30px 0px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -203,7 +215,16 @@ export default {
 }
 
 @media screen and (max-width: 576px) {
+  .sign-upload {
+    &-bg {
+      padding: 20px;
+    }
+  }
+
   .upload {
+    &-action {
+      padding: 20px;
+    }
     &-preview {
       &-wrapper {
         position: absolute;
