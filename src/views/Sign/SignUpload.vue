@@ -119,9 +119,13 @@ export default {
       // 將 PDF 畫面設定為背景
       canvas.setBackgroundImage(pdfImage, canvas.renderAll.bind(canvas))
       this.fileName = e.target.files[0].name
+      this.$store.commit('setUploadFile', { value: e.target.files[0] })
       this.setHasUpload(true)
     },
     setHasUpload(isUpload) {
+      if (!isUpload) {
+        this.$store.commit('setUploadFile', { value: undefined })
+      }
       this.$store.commit('setHasUpload', isUpload)
     },
   },

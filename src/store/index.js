@@ -9,7 +9,8 @@ export default createStore({
     // 完成上傳
     hasUpload: false,
     // 完成編輯
-    hasEdit: false
+    hasEdit: false,
+    uploadFile: undefined,
   },
   getters: {
     previousStep(state) {
@@ -40,6 +41,11 @@ export default createStore({
     setHasUpload(state, isUpload) {
       console.log('setHasUpload : ', isUpload)
       state.hasUpload = isUpload;
+    },
+    setUploadFile(state, payload) {
+      console.log('setUploadFile : ', payload)
+      state.uploadFile = payload.value;
+      console.log(state.uploadFile)
     }
   },
   actions: {},
