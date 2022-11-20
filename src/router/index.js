@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store'
 
 const resetStep = (to, from, next) => {
-  console.log(from)
+  // console.log(from)
   if (from.name !== "ContentFile" &&
     from.name !== "ContentArchive" &&
     from.name !== "ContentTrash") {
@@ -21,7 +21,7 @@ const checkHasUpload = (to, from, next, isDone = false) => {
       next();
     } else {
       // 如果沒有經過上傳步驟，前往上傳
-      console.log('go to upload.')
+      // console.log('go to upload.')
       next('/sign')
     }
   } else {
@@ -35,7 +35,7 @@ const checkHasEdit = (to, from, next) => {
   // 檢查是否有上傳步驟
   if (!checkHasUpload(to, from, next, true)) {
     // 如果沒有經過上傳步驟，前往上傳
-    console.log('go to upload.')
+    // console.log('go to upload.')
     next('/sign')
   } else {
     if (hasEdit) {
@@ -44,7 +44,7 @@ const checkHasEdit = (to, from, next) => {
       next();
     } else {
       // 如果有完成上傳步驟，沒有經過編輯步驟，前往編輯步驟
-      console.log('go to edit.')
+      // console.log('go to edit.')
       next('/sign/edit')
     }
   }

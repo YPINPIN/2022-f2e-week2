@@ -104,22 +104,16 @@ export default {
       // console.log(canvas.offsetHeight)
     },
     async uploadFilePreview() {
-      console.log('uploadFile : ', this.uploadFile)
       if (this.uploadFile === undefined) {
         return
       }
       const renderCanvas = new fabric.Canvas('preview-canvas')
       document.querySelector('#preview-canvas').fabric = renderCanvas
       renderCanvas.requestRenderAll()
-      console.log('uploadFile : ', this.uploadFile)
-      console.log(document.documentElement.clientWidth)
-      let canvasWidth = document.querySelector('.preview-canvas').width
-      console.log('canvasWidth : ', canvasWidth)
-      const pdfData = await pdfHelper.printPDF(this.uploadFile, canvasWidth)
 
-      console.log(pdfData)
+      let canvasWidth = document.querySelector('.preview-canvas').width
+      const pdfData = await pdfHelper.printPDF(this.uploadFile, canvasWidth)
       const pdfImage = await pdfHelper.pdfToImage(pdfData)
-      console.log(pdfImage)
 
       // 透過比例設定 canvas 尺寸
       renderCanvas.setWidth(pdfImage.width)
@@ -134,9 +128,7 @@ export default {
     onSignFileClick(e) {
       if (!e.target.src) return
       let src = e.target.src
-      console.log(src)
       let canvas = document.querySelector('#preview-canvas').fabric
-      console.log(canvas)
 
       fabric.Image.fromURL(src, function (image) {
         // 設定簽名出現的位置及大小，後續可調整

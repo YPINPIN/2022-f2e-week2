@@ -229,9 +229,8 @@ export default {
   methods: {
     // 編輯完成先儲存圖片
     fileDoneClick() {
-      console.log('fileDoneClick')
       let canvas = document.querySelector('#preview-canvas').fabric
-      console.log(canvas)
+
       // 將 canvas 存為圖片
       const image = canvas.toDataURL('image/png')
       if (image) {

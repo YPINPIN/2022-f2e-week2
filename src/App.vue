@@ -22,7 +22,6 @@ export default {
   methods: {
     // 關閉Modal
     handleNewSignModalClose() {
-      console.log('handleNewSignModalClose')
       this.$store.dispatch('isNewSignModalOpen', false)
     },
   },

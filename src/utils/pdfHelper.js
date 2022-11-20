@@ -30,7 +30,6 @@ export const pdfHelper = {
     const viewport = pdfPage.getViewport({ scale: width / v.width });
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-    console.log('viewport', viewport)
 
 
     // 設定 PDF 所要顯示的寬高及渲染

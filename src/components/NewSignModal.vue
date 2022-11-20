@@ -78,14 +78,7 @@
               />
             </button>
           </div>
-          <div
-            class="sign-wrapper"
-            style="
-              background: #f5f5f5;
-              border: 2px solid #b3b3b3;
-              border-radius: 20px;
-            "
-          >
+          <div class="sign-wrapper">
             <canvas
               ref="signCanvas"
               id="sign-canvas"
@@ -205,7 +198,6 @@ export default {
     saveImage() {
       // 圖片儲存的類型選擇 png ，並將值放入 img 的 src
       const newImg = this.canvas.toDataURL('image/png')
-      console.log(newImg)
       // 存到vuex
       this.$store.commit('addSignFiles', { value: newImg })
       this.handleClose()
@@ -254,6 +246,13 @@ export default {
   &-body {
     padding: 15px;
     text-align: center;
+    .sign {
+      &-wrapper {
+        background: var(--secondary-tint);
+        border: 2px solid var(--gray-30);
+        border-radius: 20px;
+      }
+    }
   }
 }
 

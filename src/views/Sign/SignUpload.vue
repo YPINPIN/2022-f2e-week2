@@ -101,16 +101,10 @@ export default {
       }
       const canvas = new fabric.Canvas('upload-preview-canvas')
       canvas.requestRenderAll()
-      console.log('e.target.files[0] : ', e.target.files[0])
-      console.log(document.documentElement.clientWidth)
       let canvasWidth =
         document.documentElement.clientWidth > 567 ? this.lgWidth : this.smWidth
-      console.log(canvasWidth)
       const pdfData = await pdfHelper.printPDF(e.target.files[0], canvasWidth)
-
-      console.log(pdfData)
       const pdfImage = await pdfHelper.pdfToImage(pdfData)
-      console.log(pdfImage)
 
       // 透過比例設定 canvas 尺寸
       canvas.setWidth(pdfImage.width)

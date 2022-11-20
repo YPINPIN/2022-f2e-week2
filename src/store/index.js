@@ -27,21 +27,21 @@ export default createStore({
   mutations: {
     // 進入首頁，初始化步驟狀態
     initStep(state) {
-      console.log('initStep')
+      // console.log('initStep')
       state.step = 0;
       state.hasUpload = false;
       state.hasEdit = false;
     },
     // 設定當前步驟
     setStep(state, curStep) {
-      console.log('setStep : ', curStep)
+      // console.log('setStep : ', curStep)
       if (state.step === 3 || (state.step > 1 && (curStep === 1 || curStep === 2))) {
-        console.log('清除編輯紀錄')
+        // console.log('清除編輯紀錄')
         state.editFileImage = undefined
       }
       if (state.step > 1) {
         // 返回上傳步驟，清除狀態
-        console.log('清除上傳紀錄')
+        // console.log('清除上傳紀錄')
         state.hasUpload = false;
         state.hasEdit = false;
         state.uploadFile = undefined;
@@ -50,31 +50,29 @@ export default createStore({
     },
     // 設定是否上傳檔案
     setHasUpload(state, isUpload) {
-      console.log('setHasUpload : ', isUpload)
+      // console.log('setHasUpload : ', isUpload)
       state.hasUpload = isUpload;
     },
     setUploadFile(state, payload) {
-      console.log('setUploadFile : ', payload)
+      // console.log('setUploadFile : ', payload)
       state.uploadFile = payload.value;
-      console.log(state.uploadFile)
     },
     // 設定是否編輯檔案
     setHasEdit(state, isEdit) {
-      console.log('setHasEdit : ', isEdit)
+      // console.log('setHasEdit : ', isEdit)
       state.hasEdit = isEdit;
     },
     // 紀錄當前編輯完成的image
     setEditFileImage(state, payload) {
-      console.log('setEditFileImage : ', payload)
+      // console.log('setEditFileImage : ', payload)
       state.editFileImage = payload.value;
-      console.log(state.editFileImage)
     },
     // 設定NewSignModal開關
     setIsNewSignModalOpen(state, isOpen) {
       state.isNewSignModalOpen = isOpen
     },
     addSignFiles(state, payload) {
-      console.log('addSignFiles : ', payload)
+      // console.log('addSignFiles : ', payload)
       state.signFiles.push(payload.value);
     }
   },
