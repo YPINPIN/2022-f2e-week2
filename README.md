@@ -7,6 +7,8 @@
 - 目前版本只完成最基本的操作流程(上傳預覽 pdf、新建簽名檔、編輯 pdf、下載 pdf 檔案)，如果點擊按鈕沒反應表示尚未實裝功能。
 
 ![screenshot](demo.gif)
+<br/><br/>
+![screenshot](demo_mobile.gif)
 
 ## 功能介紹
 
