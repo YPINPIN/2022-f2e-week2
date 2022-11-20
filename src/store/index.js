@@ -11,6 +11,7 @@ export default createStore({
     // 完成編輯
     hasEdit: false,
     uploadFile: undefined,
+    editFileImage: undefined
   },
   getters: {
     previousStep(state) {
@@ -31,10 +32,16 @@ export default createStore({
     // 設定當前步驟
     setStep(state, curStep) {
       console.log('setStep : ', curStep)
+      if (state.step === 3 || (state.step > 1 && (curStep === 1 || curStep === 2))) {
+        console.log('清除編輯紀錄')
+        state.editFileImage = undefined
+      }
       if (state.step > 1) {
         // 返回上傳步驟，清除狀態
+        console.log('清除上傳紀錄')
         state.hasUpload = false;
         state.hasEdit = false;
+        state.uploadFile = undefined;
       }
       state.step = curStep;
     },
@@ -52,6 +59,12 @@ export default createStore({
     setHasEdit(state, isEdit) {
       console.log('setHasEdit : ', isEdit)
       state.hasEdit = isEdit;
+    },
+    // 紀錄當前編輯完成的image
+    setEditFileImage(state, payload) {
+      console.log('setEditFileImage : ', payload)
+      state.editFileImage = payload.value;
+      console.log(state.editFileImage)
     },
   },
   actions: {},

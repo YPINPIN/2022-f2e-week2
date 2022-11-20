@@ -341,6 +341,11 @@ export default {
     &-right {
       width: 100%;
       height: 70%;
+      .preview {
+        &-wrapper {
+          height: 100%;
+        }
+      }
     }
   }
 }

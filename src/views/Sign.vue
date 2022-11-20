@@ -23,6 +23,7 @@
         </router-link>
         <h3 class="sign-top-title">{{ title[step] }}</h3>
         <router-link
+          v-if="step !== 2"
           :to="{ name: stepName[nextStep] }"
           :class="[
             'sign-step-btn next',
@@ -44,6 +45,29 @@
             />
           </svg>
         </router-link>
+        <button
+          v-else
+          :class="[
+            'sign-step-btn next',
+            { 'not-show': step === nextStep, disabled: isNextBtnDisabled },
+          ]"
+          @click.prevent="fileDoneClick"
+        >
+          <span class="highlight">下一步</span>
+          <svg
+            class="next-arrow"
+            width="54"
+            height="19"
+            viewBox="0 0 54 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M52 10.75C52.6904 10.75 53.25 10.1904 53.25 9.5C53.25 8.80964 52.6904 8.25 52 8.25L52 10.75ZM1.11612 8.61612C0.627964 9.10428 0.627964 9.89573 1.11612 10.3839L9.07107 18.3388C9.55923 18.827 10.3507 18.827 10.8388 18.3388C11.327 17.8507 11.327 17.0592 10.8388 16.5711L3.76777 9.5L10.8388 2.42894C11.327 1.94078 11.327 1.14932 10.8388 0.661169C10.3507 0.173014 9.55923 0.173014 9.07107 0.661169L1.11612 8.61612ZM52 8.25L2 8.25L2 10.75L52 10.75L52 8.25Z"
+              fill="#4D4D4D"
+            />
+          </svg>
+        </button>
       </div>
       <div class="sign-divider"></div>
 
@@ -72,6 +96,7 @@
           <span class="highlight">上一步</span>
         </router-link>
         <router-link
+          v-if="step !== 2"
           :to="{ name: stepName[nextStep] }"
           :class="[
             'sign-step-btn next',
@@ -94,6 +119,29 @@
             />
           </svg>
         </router-link>
+        <button
+          v-else
+          :class="[
+            'sign-step-btn next',
+            { 'not-show': step === nextStep, disabled: isNextBtnDisabled },
+          ]"
+          @click.prevent="fileDoneClick"
+        >
+          <span class="highlight">下一步</span>
+          <svg
+            class="next-arrow"
+            width="54"
+            height="19"
+            viewBox="0 0 54 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M52 10.75C52.6904 10.75 53.25 10.1904 53.25 9.5C53.25 8.80964 52.6904 8.25 52 8.25L52 10.75ZM1.11612 8.61612C0.627964 9.10428 0.627964 9.89573 1.11612 10.3839L9.07107 18.3388C9.55923 18.827 10.3507 18.827 10.8388 18.3388C11.327 17.8507 11.327 17.0592 10.8388 16.5711L3.76777 9.5L10.8388 2.42894C11.327 1.94078 11.327 1.14932 10.8388 0.661169C10.3507 0.173014 9.55923 0.173014 9.07107 0.661169L1.11612 8.61612ZM52 8.25L2 8.25L2 10.75L52 10.75L52 8.25Z"
+              fill="#4D4D4D"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   </section>
@@ -127,6 +175,22 @@ export default {
           break
       }
       return isDisabled
+    },
+  },
+  methods: {
+    // 編輯完成先儲存圖片
+    fileDoneClick() {
+      console.log('fileDoneClick')
+      let canvas = document.querySelector('#preview-canvas').fabric
+      console.log(canvas)
+      // 將 canvas 存為圖片
+      const image = canvas.toDataURL('image/png')
+      if (image) {
+        this.$store.commit('setEditFileImage', { value: image })
+        this.$router.push({ name: 'SignDone' })
+      } else {
+        console.log('fileDoneClick error')
+      }
     },
   },
 }
