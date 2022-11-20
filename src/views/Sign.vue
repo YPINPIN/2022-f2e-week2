@@ -23,7 +23,7 @@
         </router-link>
         <h3 class="sign-top-title">{{ title[step] }}</h3>
         <router-link
-          v-if="step !== 2"
+          v-if="step < 2"
           :to="{ name: stepName[nextStep] }"
           :class="[
             'sign-step-btn next',
@@ -46,7 +46,7 @@
           </svg>
         </router-link>
         <button
-          v-else
+          v-if="step === 2"
           :class="[
             'sign-step-btn next',
             { 'not-show': step === nextStep, disabled: isNextBtnDisabled },
@@ -68,6 +68,29 @@
             />
           </svg>
         </button>
+        <div class="done-tabs" v-if="step === 3">
+          <template v-for="(tab, index) in tabs" :key="index">
+            <div :class="['tabs-item', `tabs-${tab}`]">
+              <button
+                :class="[`tabs-${tab}-btn`]"
+                @click="onTabClick(index)"
+                @mouseenter="tabsHover[index] = true"
+                @mouseleave="tabsHover[index] = false"
+              >
+                <img
+                  v-show="!tabsHover[index]"
+                  :src="getImageUrl(`images/icon/ic_${tab}.svg`)"
+                  :alt="[`btn-${tab}`]"
+                />
+                <img
+                  v-show="tabsHover[index]"
+                  :src="getImageUrl(`images/icon/ic_${tab}_h.svg`)"
+                  :alt="[`btn-${tab}-hover`]"
+                />
+              </button>
+            </div>
+          </template>
+        </div>
       </div>
       <div class="sign-divider"></div>
 
@@ -96,7 +119,7 @@
           <span class="highlight">上一步</span>
         </router-link>
         <router-link
-          v-if="step !== 2"
+          v-if="step < 2"
           :to="{ name: stepName[nextStep] }"
           :class="[
             'sign-step-btn next',
@@ -120,7 +143,7 @@
           </svg>
         </router-link>
         <button
-          v-else
+          v-if="step === 2"
           :class="[
             'sign-step-btn next',
             { 'not-show': step === nextStep, disabled: isNextBtnDisabled },
@@ -142,6 +165,29 @@
             />
           </svg>
         </button>
+        <div class="done-tabs" v-if="step === 3">
+          <template v-for="(tab, index) in tabs" :key="index">
+            <div :class="['tabs-item', `tabs-${tab}`]">
+              <button
+                :class="[`tabs-${tab}-btn`]"
+                @click="onTabClick(index)"
+                @mouseenter="tabsHover[index] = true"
+                @mouseleave="tabsHover[index] = false"
+              >
+                <img
+                  v-show="!tabsHover[index]"
+                  :src="getImageUrl(`images/icon/ic_${tab}.svg`)"
+                  :alt="[`btn-${tab}`]"
+                />
+                <img
+                  v-show="tabsHover[index]"
+                  :src="getImageUrl(`images/icon/ic_${tab}_h.svg`)"
+                  :alt="[`btn-${tab}-hover`]"
+                />
+              </button>
+            </div>
+          </template>
+        </div>
       </div>
     </div>
   </section>
@@ -149,6 +195,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+const pdf = new jsPDF()
 
 export default {
   name: 'Sign',
@@ -156,10 +203,12 @@ export default {
     return {
       stepName: ['Content', 'SignUpload', 'SignEdit', 'SignDone'],
       title: ['', '上傳檔案', '簽署文件', '簽署完成'],
+      tabs: ['download', 'archive', 'trash'],
+      tabsHover: [false, false, false],
     }
   },
   computed: {
-    ...mapState(['step', 'maxStep', 'hasUpload', 'hasEdit']),
+    ...mapState(['step', 'maxStep', 'hasUpload', 'hasEdit', 'editFileImage']),
     ...mapGetters(['previousStep', 'nextStep']),
     // 檢查對應步驟是否完成
     isNextBtnDisabled() {
@@ -191,6 +240,30 @@ export default {
       } else {
         console.log('fileDoneClick error')
       }
+    },
+    getImageUrl(imagePath) {
+      return new URL(`/src/assets/${imagePath}`, import.meta.url).href
+    },
+    onTabClick(tab) {
+      // console.log('onTabClick :', tab)
+      switch (tab) {
+        case 0:
+          this.downloadFile()
+          break
+        default:
+          break
+      }
+    },
+    downloadFile() {
+      const image = this.editFileImage
+
+      // 設定背景在 PDF 中的位置及大小
+      const width = pdf.internal.pageSize.width
+      const height = pdf.internal.pageSize.height
+      pdf.addImage(image, 'png', 0, 0, width, height)
+
+      // 將檔案取名並下載
+      pdf.save('download.pdf')
     },
   },
 }
@@ -315,6 +388,12 @@ export default {
     pointer-events: none;
   }
 }
+
+.done-tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 @media screen and (max-width: 768px) {
   .sign-step-btn {
     height: 41px;
@@ -333,7 +412,8 @@ export default {
     }
     &-top {
       justify-content: center;
-      .sign-step-btn {
+      .sign-step-btn,
+      .done-tabs {
         display: none;
       }
     }
@@ -355,6 +435,10 @@ export default {
         svg {
           max-width: 32px;
         }
+      }
+      .done-tabs {
+        position: absolute;
+        top: 60px;
       }
     }
   }

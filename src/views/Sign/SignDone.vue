@@ -10,7 +10,6 @@
 
 <script>
 import { mapState } from 'vuex'
-const pdf = new jsPDF()
 
 export default {
   name: 'SignDone',
