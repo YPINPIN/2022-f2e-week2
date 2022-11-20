@@ -68,7 +68,7 @@
           id="upload-preview-canvas"
           class="upload-preview-canvas"
           width="240"
-          style="top: 90px"
+          style="bottom: 50px"
         >
         </canvas>
       </div>
@@ -193,9 +193,9 @@ export default {
     height: 100%;
     &-wrapper {
       position: absolute;
-      top: 90px;
+      bottom: 50%;
       left: calc(50%);
-      transform: translateX(-50%);
+      transform: translate(-50%, 50%);
     }
     &-close {
       position: absolute;
@@ -213,7 +213,8 @@ export default {
       text-align: center;
       overflow-wrap: break-word;
       position: absolute;
-      top: 455px;
+      // top: 455px;
+      bottom: 5px;
     }
   }
 }
@@ -232,10 +233,9 @@ export default {
     &-preview {
       &-wrapper {
         position: absolute;
-        top: 65px;
       }
       &-name {
-        top: 270px;
+        bottom: 30px;
       }
     }
   }
