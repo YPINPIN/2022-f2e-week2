@@ -1,6 +1,6 @@
 const Base64Prefix = "data:application/pdf;base64,";
 // const add = document.querySelector(".add");
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://mozilla.github.io/pdf.js/build/pdf.worker.js";
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 
 // 使用原生 FileReader 轉檔
 function readBlob(blob) {
